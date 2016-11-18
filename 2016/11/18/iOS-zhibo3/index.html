@@ -1,0 +1,709 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="直播," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在Mac系统上，通过Nginx+rtmp搭建直播服务器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视频直播第三弹 — 搭建直播服务器">
+<meta property="og:url" content="http://yoursite.com/2016/11/18/iOS-zhibo3/index.html">
+<meta property="og:site_name" content="海贼`s Pirate Ship">
+<meta property="og:description" content="在Mac系统上，通过Nginx+rtmp搭建直播服务器。">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e76849ab6441695201c0f1">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e768a6ab6441695201c0f4">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e769a4ab6441695201c0f8">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e769ceab64416b5501c14a">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e769deab64416b5501c14c">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e769f8ab64416b5501c14d">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=57e76a3cab6441695201c0ff">
+<meta property="og:updated_time" content="2016-11-18T06:48:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="视频直播第三弹 — 搭建直播服务器">
+<meta name="twitter:description" content="在Mac系统上，通过Nginx+rtmp搭建直播服务器。">
+<meta name="twitter:image" content="https://leanote.com/api/file/getImage?fileId=57e76849ab6441695201c0f1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '123456',
+      author: '海贼'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/18/iOS-zhibo3/"/>
+
+
+
+
+
+  <title> 视频直播第三弹 — 搭建直播服务器 | 海贼`s Pirate Ship </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">海贼`s Pirate Ship</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">学海无涯，哎呀我擦</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/18/iOS-zhibo3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="JHFighting">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/icon.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="海贼`s Pirate Ship">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="海贼`s Pirate Ship" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                视频直播第三弹 — 搭建直播服务器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-18T14:32:46+08:00">
+                2016-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在Mac系统上，通过Nginx+rtmp搭建直播服务器。</p>
+<a id="more"></a>
+<h5 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h5><p>nginx是非常优秀的开源服务器，用它来做hls或者rtmp流媒体服务器是非常不错的选择，本人在网上整理了安装流程，分享给大家并且作备忘。</p>
+<h5 id="步骤安装"><a href="#步骤安装" class="headerlink" title="步骤安装"></a>步骤安装</h5><p>1、安装Homebrow<br>Homebrew简称brew，是Mac OSX上的软件包管理工具，能在Mac中方便的安装软件或者卸载软件，可以说Homebrew就是mac下的apt-get、yum神器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+<p>如果已经安装过，而想要卸载：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)</span>"</span></div></pre></td></tr></table></figure>
+<p>2、安装Nginx服务器<br>增加对 nginx 的扩展;也就是从github上下载,home-brew对ngixnx的扩展</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew tap homebrew/nginx</div></pre></td></tr></table></figure>
+<p>3、安装Nginx服务器和rtmp模块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install nginx-full --with-rtmp-module</div></pre></td></tr></table></figure>
+<p>这个安装，耗时相对来说比较长。通过操作以上步骤nginx和rtmp模块就安装好了，下面开始来配置nginx的rtmp模块。<br>首先来看看我们的nginx安装在哪里</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew info nginx-full</div></pre></td></tr></table></figure>
+<p>执行上面的命令后我们可以看到信息<br><img src="https://leanote.com/api/file/getImage?fileId=57e76849ab6441695201c0f1" alt="图片标题"></p>
+<ul>
+<li>nginx安装所在位置  <code>/usr/local/Cellar/nginx-full/1.10.1/bin/nginx</code></li>
+</ul>
+<ul>
+<li>nginx配置文件所在位置  <code>/usr/local/etc/nginx/nginx.conf</code></li>
+<li>nginx服务器根目录所在位置  <code>/usr/local/var/www</code></li>
+</ul>
+<p>执行命令 ，测试下是否能成功启动nginx服务<br><code>nginx</code><br>在浏览器地址栏输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a><br><img src="https://leanote.com/api/file/getImage?fileId=57e768a6ab6441695201c0f4" alt="图片标题"><br>出现Welcome to nginx ,代表nginx安装成功了。</p>
+<p>4、配置rtmp<br>用Xcode打开<code>nginx.conf</code>, 找到<code>/usr/local/etc/nginx/nginx.conf</code> 文件,拖入到Dock中的Xcode,就可以打开.<br>或者打开<code>Finder Shift + command + G</code>前往，用记事本工具打开<code>nginx.conf</code>.   </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">……</div><div class="line">&#125;</div><div class="line"><span class="comment">#在http节点下面(也就是文件的尾部)加上rtmp配置：</span></div><div class="line">rtmp &#123;</div><div class="line">server &#123;</div><div class="line">listen 1935;</div><div class="line">application zbcs &#123;</div><div class="line">live on;</div><div class="line">record off;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>rtmp是协议名称server 说明内部中是服务器相关配置listen 监听的端口号, rtmp协议的默认端口号是1935application 访问的应用路径是 zbcs<br>live on; 开启实时record off; 不记录数据</li>
+</ul>
+<p>5、 保存文件后，重新加载nginx的配置文件（这一步很重要）<br><code>nginx -s reload</code><br>6、 安装ffmepg工具<br><code>brew install ffmpeg</code><br>安装这个需要等一段时间, 这时你可以准备一个视频文件作为来推流，然后安装一个支持rtmp协议的视频播放器.Mac下可以用 VLC(点击下载)<br>7、通过ffmepg命令进行推流</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ffmpeg -re -i 你的视频文件的绝对路径(如/Users/lideshan/Downloads/Demo.mp4) -vcodec copy <span class="_">-f</span> flv rtmp://localhost:1935/zbcs/room</div><div class="line">// 如：ffmpeg -re -i /Users/jiangys/Documents/Document/demo.mp4 -vcodec copy <span class="_">-f</span> flv rtmp://localhost:1935/zbcs/room</div></pre></td></tr></table></figure>
+<p>这里zbcs是上面的配置文件中,配置的应用的路径名称;后面的room可以随便写。<br>推流界面：<br><img src="https://leanote.com/api/file/getImage?fileId=57e769a4ab6441695201c0f8" alt="图片标题"><br>8、 验证视频<br>然后电脑上打开vlc这个播放器软件 点击File—-&gt;Open Network 在弹出来的框中选择Network然后输入URL:<br><code>rtmp://localhost:1935/zbcs/room</code><br><img src="https://leanote.com/api/file/getImage?fileId=57e769ceab64416b5501c14a" alt="图片标题"><br>双击播放<br><img src="https://leanote.com/api/file/getImage?fileId=57e769deab64416b5501c14c" alt="图片标题"><br>播放界面<img src="https://leanote.com/api/file/getImage?fileId=57e769f8ab64416b5501c14d" alt="图片标题"></p>
+<p>#####报错处理<br>1、ffmepg命令推流的时候，提示连接失败。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[tcp @ 0x7ff162504b60] Connection to tcp://localhost:1935 failed (Connection refused), trying next address</div></pre></td></tr></table></figure></p>
+<p>出现这个错，是因为配置了<code>nginx.conf</code>后，需要重启nginx。输入命令重启后就没有问题了<code>nginx -s reload</code><br><img src="https://leanote.com/api/file/getImage?fileId=57e76a3cab6441695201c0ff" alt="图片标题"><br>2、安装完nginx后，在浏览器地址栏输入：<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 显示打不开网页<br>解决方式：由于安装后nginx服务器，有时需要等上几分钟才生效。如果还不生效，测试下是否能成功启动nginx服务，命令<code>nginx</code>,具体请参考“步骤安装”第三点。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/直播/" rel="tag"># 直播</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/18/iOS-zhibo2/" rel="next" title="视频直播第二弹 — 直播框架">
+                <i class="fa fa-chevron-left"></i> 视频直播第二弹 — 直播框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/18/mac-zhuabao/" rel="prev" title="Mac上使用Wireshark抓iOS设备上的包">
+                Mac上使用Wireshark抓iOS设备上的包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/icon.png"
+               alt="JHFighting" />
+          <p class="site-author-name" itemprop="name">JHFighting</p>
+          <p class="site-description motion-element" itemprop="description">根本停不下来</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JHFighting" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1951466385?refer_flag=1001030201_&is_all=1" target="_blank" title="新浪">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  新浪
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤安装"><span class="nav-text">步骤安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JHFighting</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
