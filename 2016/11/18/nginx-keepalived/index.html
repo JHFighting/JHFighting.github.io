@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nginx,keepalived," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文主要讲述在linux系统下，利用keepalived做主备服务器自动切换（主服务器宕掉，备份服务器自动成为主服务器），配合nginx搭建服务界面。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx+keepalived主备">
+<meta property="og:url" content="http://yoursite.com/2016/11/18/nginx-keepalived/index.html">
+<meta property="og:site_name" content="海贼`s Pirate Ship">
+<meta property="og:description" content="本文主要讲述在linux系统下，利用keepalived做主备服务器自动切换（主服务器宕掉，备份服务器自动成为主服务器），配合nginx搭建服务界面。">
+<meta property="og:updated_time" content="2016-11-18T09:00:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx+keepalived主备">
+<meta name="twitter:description" content="本文主要讲述在linux系统下，利用keepalived做主备服务器自动切换（主服务器宕掉，备份服务器自动成为主服务器），配合nginx搭建服务界面。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '123456',
+      author: '海贼'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/18/nginx-keepalived/"/>
+
+
+
+
+
+  <title> nginx+keepalived主备 | 海贼`s Pirate Ship </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">海贼`s Pirate Ship</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">学海无涯，哎呀我擦</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/18/nginx-keepalived/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="JHFighting">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/icon.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="海贼`s Pirate Ship">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="海贼`s Pirate Ship" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                nginx+keepalived主备
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-18T16:52:04+08:00">
+                2016-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要讲述在linux系统下，利用keepalived做主备服务器自动切换（主服务器宕掉，备份服务器自动成为主服务器），配合nginx搭建服务界面。</p>
+<a id="more"></a>
+<h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><h3 id="1-Keepalived介绍"><a href="#1-Keepalived介绍" class="headerlink" title="1.Keepalived介绍"></a>1.Keepalived介绍</h3><blockquote>
+<p>Keepalived是一个基于VRRP协议来实现的服务高可用方案，保持存活，在网络里面就是保持在线，也就是所谓的高可用或热备。可以利用其来避免IP单点故障，类似的工具还有heartbeat、corosync、pacemaker。但是它一般不会单独出现，而是与其它负载均衡技术（如lvs、haproxy、nginx）一起工作来达到集群的高可用。</p>
+<p>VRRP协议—虚拟路由冗余协议。可以认为它是实现路由器高可用的容错协议，即将N台提供相同功能的路由器组成一个路由器组(RouterGroup)，这个组里面有一个master和多个backup，但在外界看来就像一台一样，构成虚拟路由器，拥有一个虚拟IP（vip，也就是路由器所在局域网内其他机器的默认路由），占有这个IP的master实际负责ARP相应和转发IP数据包，组中的其它路由器作为备份的角色处于待命状态。master会发组播消息，当backup在超时时间内收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master，保证路由器的高可用。</p>
+</blockquote>
+<h3 id="2-Keepalived组件"><a href="#2-Keepalived组件" class="headerlink" title="2.Keepalived组件"></a>2.Keepalived组件</h3><blockquote>
+<p>keepalived的组件：<br>core： 是keepalived的核心，负责主进程的启动和维护，全局配置文件的加载解析等。<br>check：负责health checker（健康检查），包括了各种健康检查方式，以及对应的配置的解析，包括LVS的配置解析。<br>vrrp：VRRPD子进程，VRRPD子进程就是来实现VRRP协议的。</p>
+</blockquote>
+<h3 id="3-nginx介绍"><a href="#3-nginx介绍" class="headerlink" title="3.nginx介绍"></a>3.nginx介绍</h3><blockquote>
+<p>Nginx是一款轻量级的网页服务器、反向代理服务器以及电子邮件代理服务器，特点是占有内存少、并发能力强。Nginx自身的负载均衡功能，可以通过定义Upstream地址池，通过相应的分法原则实现网站访问的首选利器。</p>
+</blockquote>
+<h2 id="二、安装配置"><a href="#二、安装配置" class="headerlink" title="二、安装配置"></a>二、安装配置</h2><h4 id="1-Keepalived"><a href="#1-Keepalived" class="headerlink" title="1 Keepalived"></a>1 Keepalived</h4><h5 id="1-1-keepalived安装"><a href="#1-1-keepalived安装" class="headerlink" title="1.1 keepalived安装"></a>1.1 keepalived安装</h5><blockquote>
+<ol>
+<li>下载keepalived <a href="http://www.keepalived.org/software/keepalived-1.2.12.tar.gz" target="_blank" rel="external">http://www.keepalived.org/software/keepalived-1.2.12.tar.gz</a><br>将其上传到/usr/local/src目录下。 (或使用yum安装： yum install –y keepalived)   </li>
+<li>cd /usr/local/src   </li>
+<li>tar zxvf keepalived-1.2.12.tar.gz   </li>
+<li>cd keepalived-1.2.12   </li>
+<li>./configure –prefix=/usr/local/keepalived (安装到/usr/local/keepalived目录下) 配置必须看到以下提示，说明配置正确，才能继续安装：<br>Use IPVS Framework : Yes<br>IPVS sync daemon support : Yes<br> Use VRRP Framework  : Yes  </li>
+<li>make          // 编辑   </li>
+<li>make install   // 安装   </li>
+<li>cp /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/keepalived<br>(复制到配置里的默认路径下/etc/sysconfig/keepalived)     </li>
+<li>mkdir /etc/keepalived   </li>
+<li>ln –s /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/ (将配置文件keepalived.conf链接到/etc/keepalived目录下)   </li>
+<li>cp /usr/local/keepalived/sbin/keepalived /usr/sbin/   </li>
+<li>cp /usr/local/keepalived/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/<br>(复制到默认的执行路径下/etc/rc.d/init.d/，这是建立服务启动脚本，以便用service命令控制)   </li>
+<li>chmod +x /etc/rc.d/init.d/keepalived (添加执行权限)</li>
+<li>chkconfig keepalived on  (设置开机启动)</li>
+</ol>
+</blockquote>
+<h5 id="1-2-配置keepalived-conf"><a href="#1-2-配置keepalived-conf" class="headerlink" title="1.2 配置keepalived.conf"></a>1.2 配置keepalived.conf</h5><p><code>#vim /etc/keepalived/keepalived.conf</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">! Configuration File <span class="keyword">for</span> keepalived </div><div class="line">global_defs &#123; </div><div class="line">// 通知的邮箱</div><div class="line">    notification_email &#123;             </div><div class="line">        youxiang@example.com </div><div class="line">    &#125; </div><div class="line">    notification_email_from itsection@example.com</div><div class="line">    // 发送email时使用的smtp服务器地址 </div><div class="line">    smtp_server mail.example.com </div><div class="line">    // 连接smtp超时时间</div><div class="line">    smtp_connect_timeout 30 </div><div class="line">    // 机器标识</div><div class="line">    router_id LVS_DEVEL           </div><div class="line">&#125; </div><div class="line">// 告诉keepalived在什么情况下切换</div><div class="line">vrrp_script chk_nginx &#123;  </div><div class="line">    <span class="comment"># script "killall -0 nginx" </span></div><div class="line">    // 自己写的检测脚本，这里是一个监听Nginx的脚本</div><div class="line">    script <span class="string">"/etc/keepalived/check_nginx.sh"</span>  </div><div class="line">    // 每2s检测一次</div><div class="line">    interval 2       </div><div class="line">    // 检测失败(脚本返回非0)，则优先级-5                     </div><div class="line">    weight -5 </div><div class="line">    // 检测连续2次算是真失败</div><div class="line">    fall 2 </div><div class="line">    // 检测1次成功就算成功</div><div class="line">    rise 1 </div><div class="line">&#125; </div><div class="line">vrrp_instance VI_1 &#123; </div><div class="line">    // 服务器状态：master(主服务器) backup(备份服务器)</div><div class="line">    state MASTER     </div><div class="line">    // 绑定的网卡         </div><div class="line">    interface eth0 </div><div class="line">    // 服务器IP</div><div class="line">    mcast_src_ip 10.4.248.10    </div><div class="line">    // 设置VRID，相同的VRID为一个组，它将决定多播的MAC地址</div><div class="line">    virtual_router_id 51</div><div class="line">    // 优先级(数字越大，优先级越高，优先级高的为master)       </div><div class="line">    priority 101   </div><div class="line">    // 检查间隔                 </div><div class="line">    advert_int 2 </div><div class="line"></div><div class="line">    // 定义认证方式和密码，主从必须一样</div><div class="line">    authentication &#123; </div><div class="line">        auth_type PASS </div><div class="line">        auth_pass 1111 </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    // 虚拟IP</div><div class="line">    virtual_ipaddress &#123;         </div><div class="line">        219.237.93.162 </div><div class="line">    &#125; </div><div class="line">    // 引用VRRP脚本，定期运行来改变优先级</div><div class="line">    track_script &#123; </div><div class="line">        chk_nginx </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在其他备机BACKUP上，只需要改变<br>state MASTER → state BACKUP，<br>priority 101 → priority 100，<br>mcast_src_ip 10.4.248.10 → mcast_src_ip 10.4.248.11 即可。</p>
+<h5 id="1-3-keepalived命令"><a href="#1-3-keepalived命令" class="headerlink" title="1.3 keepalived命令"></a>1.3 keepalived命令</h5><blockquote>
+<p>service keepalived start   #启动<br>service keepalived stop   #关闭<br>service keepalived restart  #重启</p>
+</blockquote>
+<h4 id="2-Nginx"><a href="#2-Nginx" class="headerlink" title="2 Nginx"></a>2 Nginx</h4><h5 id="2-1-nginx安装"><a href="#2-1-nginx安装" class="headerlink" title="2.1 nginx安装"></a>2.1 nginx安装</h5><blockquote>
+<ol>
+<li>首先使用yum安装缺少的依赖包： yum -y install gcc gcc-c++ make libtool zlib zlib-devel openssl openssl-devel pcre pcre-devel   </li>
+<li>cd /usr/local/src   </li>
+<li>从 <a href="http://www.nginx.org/download" target="_blank" rel="external">http://www.nginx.org/download</a>   中下载nginx  (以nginx-1.6.1为例)   </li>
+<li>tar zxvf nginx-1.6.1.tar.gz   </li>
+<li>cd nginx-1.6.1   </li>
+<li>mkdir /usr/local/nginx   </li>
+<li>./configure –prefix=/usr/local/nginx/    (将nginx安装到/usr/local/nginx目录下)   </li>
+<li>make &amp;&amp; make install</li>
+</ol>
+</blockquote>
+<h5 id="2-2-nginx命令"><a href="#2-2-nginx命令" class="headerlink" title="2.2 nginx命令"></a>2.2 nginx命令</h5><blockquote>
+<p>/usr/local/nginx/sbin/nginx          #启动<br>/usr/local/nginx/sbin/nginx –s stop     #关闭</p>
+</blockquote>
+<h4 id="3-nginx监控脚本"><a href="#3-nginx监控脚本" class="headerlink" title="3 nginx监控脚本"></a>3 nginx监控脚本</h4><p>该脚本检测nginx的运行状态，并在nginx进程不存在时尝试重新启动nginx。若重新启动失败，则将keepalived关闭，已达到切换服务器的功能。</p>
+<p><code>#vim  /etc/keepalived/check_nginx.sh</code><br>以下为脚本内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">#!/bin/bash</span></div><div class="line">// 监控nginx进程状态</div><div class="line">counter=$(ps -C nginx --no-heading|wc <span class="_">-l</span>) </div><div class="line">// 如果nginx进程不存在</div><div class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;counter&#125;</span>"</span> = <span class="string">"0"</span> ]; <span class="keyword">then</span> </div><div class="line"> 	// 尝试重启nginx</div><div class="line">    /usr/<span class="built_in">local</span>/nginx/sbin/nginx     </div><div class="line">    sleep 2 </div><div class="line">    counter=$(ps -C nginx --no-heading|wc <span class="_">-l</span>) </div><div class="line">    <span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;counter&#125;</span>"</span> = <span class="string">"0"</span> ]; <span class="keyword">then</span> </div><div class="line">        // 停止keepalived服务</div><div class="line">        /etc/rc.d/init.d/keepalived stop </div><div class="line">    <span class="keyword">fi</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+            <a href="/tags/keepalived/" rel="tag"># keepalived</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/18/ajax/" rel="next" title="Ajax学习总结">
+                <i class="fa fa-chevron-left"></i> Ajax学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/18/python-piece/" rel="prev" title="Python学习记录 -- 知识碎片">
+                Python学习记录 -- 知识碎片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/icon.png"
+               alt="JHFighting" />
+          <p class="site-author-name" itemprop="name">JHFighting</p>
+          <p class="site-description motion-element" itemprop="description">根本停不下来</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">博客</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JHFighting" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1951466385?refer_flag=1001030201_&is_all=1" target="_blank" title="新浪">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  新浪
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、介绍"><span class="nav-text">一、介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Keepalived介绍"><span class="nav-text">1.Keepalived介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Keepalived组件"><span class="nav-text">2.Keepalived组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nginx介绍"><span class="nav-text">3.nginx介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装配置"><span class="nav-text">二、安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Keepalived"><span class="nav-text">1 Keepalived</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-keepalived安装"><span class="nav-text">1.1 keepalived安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-配置keepalived-conf"><span class="nav-text">1.2 配置keepalived.conf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-keepalived命令"><span class="nav-text">1.3 keepalived命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Nginx"><span class="nav-text">2 Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-nginx安装"><span class="nav-text">2.1 nginx安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-nginx命令"><span class="nav-text">2.2 nginx命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-nginx监控脚本"><span class="nav-text">3 nginx监控脚本</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JHFighting</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
