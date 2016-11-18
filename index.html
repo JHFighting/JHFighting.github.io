@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -100,13 +100,13 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
-      author: 'Author'
+      userId: '123456',
+      author: '海贼'
     },
     algolia: {
       applicationID: '',
@@ -129,7 +129,7 @@
   <title> 海贼`s Pirate Ship </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -186,7 +186,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -196,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -206,7 +226,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -244,7 +264,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="JHFighting">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="/images/icon.png">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -278,7 +298,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-18T09:18:52+08:00">
                 2016-11-18
               </time>
@@ -316,9 +336,18 @@
 
       
         
-          
-            
-          
+          <p>#freeradius</p>
+<p>###1.概念<br><strong>radius</strong>   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ungzip</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        print(<span class="string">'正在解压...'</span>)</div><div class="line">        data = gzip.decompress(data)</div><div class="line">        print(<span class="string">'解压完毕'</span>)</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        print(<span class="string">'无需解压'</span>)</div><div class="line">    <span class="keyword">return</span> data</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> main();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">dispatch_async</span>(queue, ^&#123;</div><div class="line">    dispatch_group_t group = dispatch_group_create();</div><div class="line">    dispatch_group_async(group, queue, ^&#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"1"</span>);</div><div class="line">        sleep(<span class="number">1</span>);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"111"</span>);</div><div class="line">    &#125;);</div><div class="line">    dispatch_group_async(group, queue, ^&#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"2"</span>);</div><div class="line">        sleep(<span class="number">2</span>);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"222"</span>);</div><div class="line">    &#125;);</div><div class="line">    dispatch_group_async(group, queue, ^&#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"3"</span>);</div><div class="line">        sleep(<span class="number">1</span>);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"333"</span>);</div><div class="line">    &#125;);</div><div class="line">    dispatch_group_notify(group, queue, ^&#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GAME OVER"</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/18/new-bolg/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -360,7 +389,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="JHFighting">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="/images/icon.png">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -394,7 +423,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-17T18:19:12+08:00">
                 2016-11-17
               </time>
@@ -504,7 +533,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/icon.png"
                alt="JHFighting" />
           <p class="site-author-name" itemprop="name">JHFighting</p>
           <p class="site-description motion-element" itemprop="description">根本停不下来</p>
@@ -513,12 +542,19 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -526,6 +562,26 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JHFighting" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1951466385?refer_flag=1001030201_&is_all=1" target="_blank" title="新浪">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  新浪
+                </a>
+              </span>
+            
           
         </div>
 
@@ -564,13 +620,13 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 
