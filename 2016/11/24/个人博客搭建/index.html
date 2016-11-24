@@ -1,0 +1,872 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="博客,hexo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍通过hexo+github搭建个人博客的详细步骤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人博客搭建">
+<meta property="og:url" content="http://www.god-huan.xyz/2016/11/24/个人博客搭建/index.html">
+<meta property="og:site_name" content="海贼`s Pirate Ship">
+<meta property="og:description" content="本文主要介绍通过hexo+github搭建个人博客的详细步骤。">
+<meta property="og:image" content="http://www.god-huan.xyz/./hexomulu.png">
+<meta property="og:image" content="http://www.god-huan.xyz/./hexoblog1.png">
+<meta property="og:image" content="http://www.god-huan.xyz/./hexo写1.png">
+<meta property="og:image" content="http://www.god-huan.xyz/./域名解析3.png">
+<meta property="og:image" content="http://www.god-huan.xyz/./绑定域名1.png">
+<meta property="og:image" content="http://www.god-huan.xyz/./绑定域名2.png">
+<meta property="og:image" content="http://www.god-huan.xyz/./hexo_next.png">
+<meta property="og:updated_time" content="2016-11-24T03:35:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="个人博客搭建">
+<meta name="twitter:description" content="本文主要介绍通过hexo+github搭建个人博客的详细步骤。">
+<meta name="twitter:image" content="http://www.god-huan.xyz/./hexomulu.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '123456',
+      author: '海贼'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.god-huan.xyz/2016/11/24/个人博客搭建/"/>
+
+
+
+
+
+  <title> 个人博客搭建 | 海贼`s Pirate Ship </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">海贼`s Pirate Ship</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">学海无涯，哎呀我擦</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.god-huan.xyz/2016/11/24/个人博客搭建/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="JHFighting">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/icon.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="海贼`s Pirate Ship">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="海贼`s Pirate Ship" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                个人博客搭建
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T11:29:44+08:00">
+                2016-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂文/" itemprop="url" rel="index">
+                    <span itemprop="name">杂文</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/11/24/个人博客搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/个人博客搭建/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要介绍通过<code>hexo+github</code>搭建个人博客的详细步骤。</p>
+<a id="more"></a>
+<h4 id="一-安装Hexo"><a href="#一-安装Hexo" class="headerlink" title="一. 安装Hexo"></a>一. 安装Hexo</h4><p>本人在mac下安装hexo，首先需要安装<code>npm</code>，NPM是随同NodeJS一起安装的包管理工具,能解决NodeJS代码部署上的很多问题。如果电脑上没有<code>npm</code>，推荐使用<code>Homebrew</code>来安装,Homebrew是一款非常强大的可以应用在MAC中的Linux管理包：</p>
+<p>1.执行安装brew</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+<p>2.使用brew安装需要的命令，例如安装wget:   </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install wget</div></pre></td></tr></table></figure>
+<p>这里使用brew安装npm:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install npm</div></pre></td></tr></table></figure>
+<p>然后使用npm安装hexo框架:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<h4 id="二-创建本地hexo"><a href="#二-创建本地hexo" class="headerlink" title="二. 创建本地hexo"></a>二. 创建本地hexo</h4><h5 id="1-初始化hexo"><a href="#1-初始化hexo" class="headerlink" title="1.初始化hexo"></a>1.初始化hexo</h5><p>新建一个文件夹作为hexo的本目录，例如<code>blog</code>，进入<code>blog</code>下执行命令初始化hexo：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure>
+<p>生成如下几个文件：   </p>
+<p><img src="./hexomulu.png" alt="MacDown Screenshot">   </p>
+<p><code>_config.yml</code>: 主配置文件<br><code>themes</code>: 主题<br><code>source</code>: 博客内容原始文章以及草稿<br><code>public</code>: 存放生成的所有静态页面<br><code>node_modules</code>: hexo插件<br><code>scaffolds</code>: 创建文档、页面初始模板   </p>
+<p><code>_config.yml</code>配置文件中的都是基本的配置选项，比较简单，根据需求完成配置，其中<code>language</code>配置项的值要与主题中<code>languages</code>下的文件名称相对应。然后执行以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo s</div></pre></td></tr></table></figure>
+<p>然后打开浏览器，输入<code>localhost:4000</code>查看hexo初始化的界面：</p>
+<p><img src="./hexoblog1.png" alt="MacDown Screenshot"></p>
+<h5 id="2-hexo常用命令"><a href="#2-hexo常用命令" class="headerlink" title="2.hexo常用命令"></a>2.hexo常用命令</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g <span class="comment">#安装</span></div><div class="line">npm update hexo -g <span class="comment">#升级</span></div><div class="line"></div><div class="line">hexo init <span class="comment">#初始化hexo，也可以指定初始化的文件夹(hexo init blog)</span></div><div class="line"></div><div class="line">hexo g == hexo generate  <span class="comment"># 生成静态文件</span></div><div class="line">hexo d == hexo deploy	<span class="comment"># 部署</span></div><div class="line">hexo s == hexo server  <span class="comment"># 启动服务(默认4000端口)</span></div><div class="line">hexo server -p 4001	<span class="comment"># 指定端口</span></div><div class="line">hexo clean 	<span class="comment"># 清除缓存</span></div><div class="line"></div><div class="line">hexo n <span class="string">"newblog"</span> == hexo new <span class="string">"newblog"</span> <span class="comment">#新建文章</span></div><div class="line">hexo new page <span class="string">'mypage'</span>    <span class="comment"># 新建页面</span></div></pre></td></tr></table></figure>
+<h5 id="3-hexo基本使用"><a href="#3-hexo基本使用" class="headerlink" title="3.hexo基本使用"></a>3.hexo基本使用</h5><p>1.首页显示<code>全文阅读</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;!-- more --&gt;</div></pre></td></tr></table></figure>
+<p>2.<code>#</code>号显示不正常<br>使用hexo写文章，需要严格makedown的书写规范，<code>#</code>号与标题之间必须加一个空格。</p>
+<p>3.代码高亮<br>想要让代码高亮，需要使用以下格式:<br><img src="./hexo写1.png" alt="MacDown Screenshot">   </p>
+<p>根据使用语言的不同添加不同的语言标识，下表为常用语言对应的标识：   </p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>对应代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bash</td>
+<td>bash, sh, zsh</td>
+</tr>
+<tr>
+<td>C#</td>
+<td>cs, csharp</td>
+</tr>
+<tr>
+<td>C++</td>
+<td>cpp, c, cc, h, c++, h++, hpp</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>css</td>
+</tr>
+<tr>
+<td>DOS</td>
+<td>dos, bat, cmd</td>
+</tr>
+<tr>
+<td>HTML, XML</td>
+<td>xml, html, xhtml, rss, atom, xjb, xsd, xsl, plist</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td>json</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>java, jsp</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>javascript, js, jsx</td>
+</tr>
+<tr>
+<td>Objective C</td>
+<td>objectivec, mm, objc, obj-c</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>php, php3, php4, php5, php6</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>ruby, rb, gemspec, podspec, thor, irb</td>
+</tr>
+<tr>
+<td>SQL</td>
+<td>sql</td>
+</tr>
+<tr>
+<td>Swift</td>
+<td>swift</td>
+</tr>
+<tr>
+<td>VB.Net</td>
+<td>vbnet, vb</td>
+</tr>
+</tbody>
+</table>
+<p>4.文章中添加图片<br>文章插入图片需要用到Hexo的一个插件，首先在根目录执行以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</div></pre></td></tr></table></figure>
+<p>然后将需要使用的图片添加到<code>pubilc</code>下文章对应的文件夹下。</p>
+<h4 id="三-部署到githud"><a href="#三-部署到githud" class="headerlink" title="三. 部署到githud"></a>三. 部署到githud</h4><p>1.注册githud账号<br>2.创建与github账号同名的repository，例如，github的账号名为<code>jhfighting</code>，就创建<code>jhfighting.github.io</code>。<br>3.在blog的本目录下执行以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>如下所示编辑_config.yml:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">type: git</div><div class="line">repository: git@github.com:jhfighting/jhfighting.github.io.git</div><div class="line">branch: master</div></pre></td></tr></table></figure>
+<p>4.提交文件到github<br>在本地clone<code>jhfighting.github.io</code>，进入<code>jhfighting.github.io</code>文件夹中，将之前创建的hexo文件夹移至该文件夹中，然后执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g  # 生成静态页面</div><div class="line">hexo d  # 提交</div></pre></td></tr></table></figure>
+<p>这里直接提交需要配置ssh，网上有详细的步骤，这里通过安装<code>Github Desktop</code>，来提交到github上。然后在浏览器中通过访问<code>jhfighting.github.io</code>即可查看博客界面。</p>
+<h4 id="四-绑定个人域名"><a href="#四-绑定个人域名" class="headerlink" title="四. 绑定个人域名"></a>四. 绑定个人域名</h4><h5 id="1-注册域名"><a href="#1-注册域名" class="headerlink" title="1.注册域名"></a>1.注册域名</h5><p>在网上注册一个域名账号，一些新的顶级域名（xyz,top等）很便宜，第一年只要1-2元。</p>
+<h5 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2.域名解析"></a>2.域名解析</h5><p>注册成功后，在域名的控制台中选择解析该域名。添加如下一条解析记录。<br><img src="./域名解析3.png" alt="MacDown Screenshot"></p>
+<h5 id="3-github绑定域名"><a href="#3-github绑定域名" class="headerlink" title="3.github绑定域名"></a>3.github绑定域名</h5><p>首先进入github中的<code>jhfighting.github.io</code>pages中，点击<code>setting</code><br><img src="./绑定域名1.png" alt="MacDown Screenshot"></p>
+<p>在<code>Custom domain</code>中填写需要绑定的域名，点击<code>save</code>保存。   </p>
+<p><img src="./绑定域名2.png" alt="MacDown Screenshot"></p>
+<p>hexo部署到github，会生成一个<code>CNAME</code>文件（没有后缀名），内容为绑定的域名。如果没有生成，可以在hexo中的<code>source</code>里添加<code>CNAME</code>文件，然后重新生成部署。此时，就可以通过注册的域名来访问个人博客啦。</p>
+<h4 id="五-博客优化"><a href="#五-博客优化" class="headerlink" title="五. 博客优化"></a>五. 博客优化</h4><p>hexo自带以及支持hexo第三方主题有很多，我们可以选择一款自己喜欢的主题来配置博客。这里选用了第三方主题<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a>来配置优化。</p>
+<h5 id="1-更换next主题"><a href="#1-更换next主题" class="headerlink" title="1.更换next主题"></a>1.更换next主题</h5><ul>
+<li>首先从<code>github</code>中下载并解压，然后将解压过的文件重命名为<code>next</code>（看心情）移至<code>themes</code>下。</li>
+<li>在主配置文件中将<code>themes</code>对应的配置项改为<code>next</code>。</li>
+<li><code>hexo g</code>、<code>hexo s</code>浏览界面。</li>
+</ul>
+<p><img src="./hexo_next.png" alt="MacDown Screenshot"></p>
+<h5 id="2-修改next配置"><a href="#2-修改next配置" class="headerlink" title="2.修改next配置"></a>2.修改next配置</h5><p><code>next</code>本身有许多不错的配置，并且还支持很多第三方的服务。具体配置可以查看<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">官方文档</a>，说明比较详细，根据自己的喜好完成配置。</p>
+<h4 id="六-一些小坑"><a href="#六-一些小坑" class="headerlink" title="六. 一些小坑"></a>六. 一些小坑</h4><h5 id="1-tags、categoryes等页面不显示"><a href="#1-tags、categoryes等页面不显示" class="headerlink" title="1.tags、categoryes等页面不显示"></a>1.tags、categoryes等页面不显示</h5><p>没有自动生成相应的<code>index.html</code>文件，可以手动添加这些<code>page</code>（以tags为例）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page tags</div></pre></td></tr></table></figure>
+<p>编辑根目录下的<code>source/tags/index.md</code>，添加：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: tags</div><div class="line">date: 2015-10-20 06:49:50</div><div class="line"><span class="built_in">type</span>: <span class="string">"tags"</span></div><div class="line">comments: <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p>同理，<code>categories</code>、<code>about</code>或一些其他自定义的界面都可以使用这种方式来添加。</p>
+<h5 id="2-右侧的文章目录显示不正确"><a href="#2-右侧的文章目录显示不正确" class="headerlink" title="2. 右侧的文章目录显示不正确"></a>2. 右侧的文章目录显示不正确</h5><p>首先需要使用正确的markdown格式，标题与#号之前加空格，同时标题末尾需要回车。另外文章目录会自动添加标号，想要去掉可以到主题的<code>_config.yml</code>文件，编辑：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">toc:</div><div class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></div><div class="line"></div><div class="line">  <span class="comment"># Automatically add list number to toc.</span></div><div class="line">  number: <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>将<code>number</code>改为<code>false</code>即可。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/博客/" rel="tag"># 博客</a>
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/18/python-piece/" rel="next" title="Python学习记录 -- 知识碎片">
+                <i class="fa fa-chevron-left"></i> Python学习记录 -- 知识碎片
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/24/个人博客搭建/"
+     data-title="个人博客搭建"
+     data-content=""
+     data-url="http://www.god-huan.xyz/2016/11/24/个人博客搭建/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/24/个人博客搭建/"
+           data-title="个人博客搭建" data-url="http://www.god-huan.xyz/2016/11/24/个人博客搭建/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/icon.png"
+               alt="JHFighting" />
+          <p class="site-author-name" itemprop="name">JHFighting</p>
+          <p class="site-description motion-element" itemprop="description">根本停不下来</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">博客</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JHFighting" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1951466385" target="_blank" title="新浪">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  新浪
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-安装Hexo"><span class="nav-text">一. 安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-创建本地hexo"><span class="nav-text">二. 创建本地hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-初始化hexo"><span class="nav-text">1.初始化hexo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-hexo常用命令"><span class="nav-text">2.hexo常用命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-hexo基本使用"><span class="nav-text">3.hexo基本使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-部署到githud"><span class="nav-text">三. 部署到githud</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-绑定个人域名"><span class="nav-text">四. 绑定个人域名</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-注册域名"><span class="nav-text">1.注册域名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-域名解析"><span class="nav-text">2.域名解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-github绑定域名"><span class="nav-text">3.github绑定域名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-博客优化"><span class="nav-text">五. 博客优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-更换next主题"><span class="nav-text">1.更换next主题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-修改next配置"><span class="nav-text">2.修改next配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六-一些小坑"><span class="nav-text">六. 一些小坑</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-tags、categoryes等页面不显示"><span class="nav-text">1.tags、categoryes等页面不显示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-右侧的文章目录显示不正确"><span class="nav-text">2. 右侧的文章目录显示不正确</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JHFighting</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jhfighting"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
