@@ -86,7 +86,7 @@
 
 <meta name="description" content="本文主要介绍通过hexo+github搭建个人博客的详细步骤。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="个人博客搭建">
+<meta property="og:title" content="个人博客搭建hexo+github">
 <meta property="og:url" content="http://www.god-huan.xyz/2016/11/24/个人博客搭建/index.html">
 <meta property="og:site_name" content="海贼`s Pirate Ship">
 <meta property="og:description" content="本文主要介绍通过hexo+github搭建个人博客的详细步骤。">
@@ -97,9 +97,9 @@
 <meta property="og:image" content="http://www.god-huan.xyz/./绑定域名1.png">
 <meta property="og:image" content="http://www.god-huan.xyz/./绑定域名2.png">
 <meta property="og:image" content="http://www.god-huan.xyz/./hexo_next.png">
-<meta property="og:updated_time" content="2016-11-24T03:35:38.000Z">
+<meta property="og:updated_time" content="2016-11-24T03:55:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="个人博客搭建">
+<meta name="twitter:title" content="个人博客搭建hexo+github">
 <meta name="twitter:description" content="本文主要介绍通过hexo+github搭建个人博客的详细步骤。">
 <meta name="twitter:image" content="http://www.god-huan.xyz/./hexomulu.png">
 
@@ -135,7 +135,7 @@
 
 
 
-  <title> 个人博客搭建 | 海贼`s Pirate Ship </title>
+  <title> 个人博客搭建hexo+github | 海贼`s Pirate Ship </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -290,7 +290,7 @@
             
             
               
-                个人博客搭建
+                个人博客搭建hexo+github
               
             
           </h1>
@@ -392,7 +392,7 @@
 <h5 id="2-hexo常用命令"><a href="#2-hexo常用命令" class="headerlink" title="2.hexo常用命令"></a>2.hexo常用命令</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g <span class="comment">#安装</span></div><div class="line">npm update hexo -g <span class="comment">#升级</span></div><div class="line"></div><div class="line">hexo init <span class="comment">#初始化hexo，也可以指定初始化的文件夹(hexo init blog)</span></div><div class="line"></div><div class="line">hexo g == hexo generate  <span class="comment"># 生成静态文件</span></div><div class="line">hexo d == hexo deploy	<span class="comment"># 部署</span></div><div class="line">hexo s == hexo server  <span class="comment"># 启动服务(默认4000端口)</span></div><div class="line">hexo server -p 4001	<span class="comment"># 指定端口</span></div><div class="line">hexo clean 	<span class="comment"># 清除缓存</span></div><div class="line"></div><div class="line">hexo n <span class="string">"newblog"</span> == hexo new <span class="string">"newblog"</span> <span class="comment">#新建文章</span></div><div class="line">hexo new page <span class="string">'mypage'</span>    <span class="comment"># 新建页面</span></div></pre></td></tr></table></figure>
 <h5 id="3-hexo基本使用"><a href="#3-hexo基本使用" class="headerlink" title="3.hexo基本使用"></a>3.hexo基本使用</h5><p>1.首页显示<code>全文阅读</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;!-- more --&gt;</div></pre></td></tr></table></figure>
-<p>2.<code>#</code>号显示不正常<br>使用hexo写文章，需要严格makedown的书写规范，<code>#</code>号与标题之间必须加一个空格。</p>
+<p>2.<code>#</code>号显示不正常<br>使用hexo写文章，需要严格markdown的书写规范，<code>#</code>号与标题之间必须加一个空格。</p>
 <p>3.代码高亮<br>想要让代码高亮，需要使用以下格式:<br><img src="./hexo写1.png" alt="MacDown Screenshot">   </p>
 <p>根据使用语言的不同添加不同的语言标识，下表为常用语言对应的标识：   </p>
 <table>
@@ -480,7 +480,7 @@
 <h5 id="3-github绑定域名"><a href="#3-github绑定域名" class="headerlink" title="3.github绑定域名"></a>3.github绑定域名</h5><p>首先进入github中的<code>jhfighting.github.io</code>pages中，点击<code>setting</code><br><img src="./绑定域名1.png" alt="MacDown Screenshot"></p>
 <p>在<code>Custom domain</code>中填写需要绑定的域名，点击<code>save</code>保存。   </p>
 <p><img src="./绑定域名2.png" alt="MacDown Screenshot"></p>
-<p>hexo部署到github，会生成一个<code>CNAME</code>文件（没有后缀名），内容为绑定的域名。如果没有生成，可以在hexo中的<code>source</code>里添加<code>CNAME</code>文件，然后重新生成部署。此时，就可以通过注册的域名来访问个人博客啦。</p>
+<p>在hexo中的<code>source</code>里添加<code>CNAME</code>文件，然后重新生成部署。此时，就可以通过注册的域名来访问个人博客啦。</p>
 <h4 id="五-博客优化"><a href="#五-博客优化" class="headerlink" title="五. 博客优化"></a>五. 博客优化</h4><p>hexo自带以及支持hexo第三方主题有很多，我们可以选择一款自己喜欢的主题来配置博客。这里选用了第三方主题<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a>来配置优化。</p>
 <h5 id="1-更换next主题"><a href="#1-更换next主题" class="headerlink" title="1.更换next主题"></a>1.更换next主题</h5><ul>
 <li>首先从<code>github</code>中下载并解压，然后将解压过的文件重命名为<code>next</code>（看心情）移至<code>themes</code>下。</li>
@@ -555,7 +555,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/11/24/个人博客搭建/"
-     data-title="个人博客搭建"
+     data-title="个人博客搭建hexo+github"
      data-content=""
      data-url="http://www.god-huan.xyz/2016/11/24/个人博客搭建/">
   <div class="ds-share-inline">
@@ -585,7 +585,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/11/24/个人博客搭建/"
-           data-title="个人博客搭建" data-url="http://www.god-huan.xyz/2016/11/24/个人博客搭建/">
+           data-title="个人博客搭建hexo+github" data-url="http://www.god-huan.xyz/2016/11/24/个人博客搭建/">
       </div>
     
   </div>
