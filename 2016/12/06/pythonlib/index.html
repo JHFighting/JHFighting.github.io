@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mac," />
+  <meta name="keywords" content="第三方," />
 
 
 
@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="在mac系统下，使用Wireshark工具来抓取iOS设备上的数据包。">
+<meta name="description" content="记录一些常用的第三方模块">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac上使用Wireshark抓iOS设备上的包">
-<meta property="og:url" content="http://www.god-huan.xyz/2016/11/18/mac-zhuabao/index.html">
+<meta property="og:title" content="Python第三方模块">
+<meta property="og:url" content="http://www.god-huan.xyz/2016/12/06/pythonlib/index.html">
 <meta property="og:site_name" content="海贼`s Pirate Ship">
-<meta property="og:description" content="在mac系统下，使用Wireshark工具来抓取iOS设备上的数据包。">
-<meta property="og:image" content="http://leanote.com/api/file/getImage?fileId=5677bf9bab6441660a004e2e">
-<meta property="og:image" content="http://leanote.com/api/file/getImage?fileId=5677c0e0ab6441660a004e75">
-<meta property="og:updated_time" content="2016-11-18T13:29:59.000Z">
+<meta property="og:description" content="记录一些常用的第三方模块">
+<meta property="og:updated_time" content="2016-12-06T06:10:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac上使用Wireshark抓iOS设备上的包">
-<meta name="twitter:description" content="在mac系统下，使用Wireshark工具来抓取iOS设备上的数据包。">
-<meta name="twitter:image" content="http://leanote.com/api/file/getImage?fileId=5677bf9bab6441660a004e2e">
+<meta name="twitter:title" content="Python第三方模块">
+<meta name="twitter:description" content="记录一些常用的第三方模块">
 
 
 
@@ -124,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://www.god-huan.xyz/2016/11/18/mac-zhuabao/"/>
+  <link rel="canonical" href="http://www.god-huan.xyz/2016/12/06/pythonlib/"/>
 
 
 
 
 
-  <title> Mac上使用Wireshark抓iOS设备上的包 | 海贼`s Pirate Ship </title>
+  <title> Python第三方模块 | 海贼`s Pirate Ship </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +258,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.god-huan.xyz/2016/11/18/mac-zhuabao/">
+  <link itemprop="mainEntityOfPage" href="http://www.god-huan.xyz/2016/12/06/pythonlib/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="JHFighting">
@@ -285,7 +282,7 @@
             
             
               
-                Mac上使用Wireshark抓iOS设备上的包
+                Python第三方模块
               
             
           </h1>
@@ -298,8 +295,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-18T14:58:45+08:00">
-                2016-11-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-06T13:59:55+08:00">
+                2016-12-06
               </time>
             
 
@@ -317,8 +314,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -332,8 +329,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/18/mac-zhuabao/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/18/mac-zhuabao/" itemprop="commentCount"></span>
+                <a href="/2016/12/06/pythonlib/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/06/pythonlib/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -364,26 +361,19 @@
       
 
       
-        <p>在mac系统下，使用Wireshark工具来抓取iOS设备上的数据包。</p>
+        <p>记录一些常用的第三方模块   </p>
 <a id="more"></a>
-<h3 id="1-安装Wireshark"><a href="#1-安装Wireshark" class="headerlink" title="1.安装Wireshark"></a>1.安装Wireshark</h3><p>安装Wireshark前需要安装XQuartz，将XQuartz作为X11 Server。</p>
-<h3 id="2-准备设备"><a href="#2-准备设备" class="headerlink" title="2.准备设备"></a>2.准备设备</h3><ol>
-<li>使用USB数据线将iOS设备连接到MAC上</li>
-<li>获得iOS设备的UDID，可以使用iTools查看，也可以使用Xcode的Organizer工具查看</li>
-<li><p>创建RVI接口<br>使用如下命令行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rvictl <span class="_">-s</span> &lt;UDID&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="http://leanote.com/api/file/getImage?fileId=5677bf9bab6441660a004e2e" alt="title"><br>如图，为rvi0接口，则抓包时需要抓rvi0接口的包。</p>
-<h3 id="3-选择网卡，开始抓包"><a href="#3-选择网卡，开始抓包" class="headerlink" title="3.选择网卡，开始抓包"></a>3.选择网卡，开始抓包</h3><p>实际上，很多情况下会出现无法发现网卡的权限问题。这就需要先给与相应的权限。<br>首先执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls <span class="_">-l</span> /dev/bpf*</div></pre></td></tr></table></figure>
-<p>查看权限，若不是读写的话则需要增加权限。可以使用</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod g+rw /dev/bpf*</div></pre></td></tr></table></figure>
-<p>（重启不需要重新配置）<br>或</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod 644 /dev/bpf*</div></pre></td></tr></table></figure>
-<p>(重启需要重新配置)。</p>
-<p><img src="http://leanote.com/api/file/getImage?fileId=5677c0e0ab6441660a004e75" alt="title"></p>
-<p>有了权限，接下来就可以到Wireshark里抓rvi0的包，即连接的iOS设备上的包。<br>OK！到这里就大功告成，可以开始抓包了。</p>
+<h5 id="1、Pillow-–-图像处理"><a href="#1、Pillow-–-图像处理" class="headerlink" title="1、Pillow – 图像处理"></a>1、Pillow – 图像处理</h5><p>PIL：<code>Python Imaging Library</code>，已经是Python平台事实上的图像处理标准库了。PIL功能非常强大，但API却非常简单易用。由于PIL仅支持到Python 2.7，加上年久失修，于是一群志愿者在PIL的基础上创建了兼容的版本，名字叫<a href="https://github.com/python-pillow/Pillow" target="_blank" rel="external">Pillow</a>，支持最新Python 3.x，又加入了许多新特性，因此，我们可以直接安装使用Pillow。</p>
+<h5 id="2、virtualenv-–-为应用创建独立python运行环境"><a href="#2、virtualenv-–-为应用创建独立python运行环境" class="headerlink" title="2、virtualenv – 为应用创建独立python运行环境"></a>2、virtualenv – 为应用创建独立python运行环境</h5><p>在开发Python应用程序的时候，系统安装的Python3只有一个版本：3.4。所有第三方的包都会被<code>pip</code>安装到Python3的<code>site-packages</code>目录下。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个Python，就是安装在系统的Python 3。如果应用A需要jinja 2.7，而应用B需要jinja 2.6怎么办？这种情况下，每个应用可能需要各自拥有一套“独立”的Python运行环境。virtualenv就是用来为一个应用创建一套“隔离”的Python运行环境。</p>
+<h5 id="3、常见的Web框架"><a href="#3、常见的Web框架" class="headerlink" title="3、常见的Web框架"></a>3、常见的Web框架</h5><ul>
+<li><a href="http://flask.pocoo.org" target="_blank" rel="external">Flask</a> – 轻量级的Web框架</li>
+<li><a href="https://www.djangoproject.com" target="_blank" rel="external">Django</a>：全能型Web框架；</li>
+<li><a href="http://webpy.org/" target="_blank" rel="external">web.py</a>：一个小巧的Web框架；</li>
+<li><a href="http://bottlepy.org/docs/dev/" target="_blank" rel="external">Bottle</a>：和Flask类似的Web框架；</li>
+<li><a href="http://www.tornadoweb.org" target="_blank" rel="external">Tornado</a>：Facebook的开源异步Web框架。</li>
+</ul>
+<h5 id="4、Jinja2-–-模板引擎"><a href="#4、Jinja2-–-模板引擎" class="headerlink" title="4、Jinja2 – 模板引擎"></a>4、Jinja2 – 模板引擎</h5><p>Jinja2是Python下一个被广泛应用的模版引擎，他的设计思想来源与Django的模板引擎，并扩展了其语法和一系列强大的功能。其中最显著的一个是增加了沙箱执行功能和可选的自动转义功能，这对大多应用的安全性来说是非常重要的。<br>Jinja2的语法与Django内置模板大致相同，只是少了一些限制。<br>Flask中内置Jinja2。</p>
+<h5 id="5、Beautiful-Soup-–-从HTML或XML文件中提取数据"><a href="#5、Beautiful-Soup-–-从HTML或XML文件中提取数据" class="headerlink" title="5、Beautiful Soup – 从HTML或XML文件中提取数据"></a>5、Beautiful Soup – 从HTML或XML文件中提取数据</h5><p><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/" target="_blank" rel="external">Beautiful Soup</a>﻿ 是一个可以从HTML或XML文件中提取数据的Python库。它能够通过你喜欢的转换器实现惯用的文档导航，查找,修改文档的方式.Beautiful Soup会帮你节省数小时甚至数天的工作时间。<br>python爬虫基本可以取代正则，使用简单。</p>
 
       
     </div>
@@ -407,7 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mac/" rel="tag"># mac</a>
+            <a href="/tags/第三方/" rel="tag"># 第三方</a>
           
         </div>
       
@@ -416,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/18/iOS-zhibo3/" rel="next" title="视频直播第三弹 — 搭建直播服务器">
-                <i class="fa fa-chevron-left"></i> 视频直播第三弹 — 搭建直播服务器
+              <a href="/2016/11/24/个人博客搭建/" rel="next" title="个人博客搭建hexo+github">
+                <i class="fa fa-chevron-left"></i> 个人博客搭建hexo+github
               </a>
             
           </div>
@@ -425,10 +415,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/18/ajax/" rel="prev" title="Ajax学习总结">
-                Ajax学习总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -443,10 +429,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/18/mac-zhuabao/"
-     data-title="Mac上使用Wireshark抓iOS设备上的包"
+        <div class="ds-share flat" data-thread-key="2016/12/06/pythonlib/"
+     data-title="Python第三方模块"
      data-content=""
-     data-url="http://www.god-huan.xyz/2016/11/18/mac-zhuabao/">
+     data-url="http://www.god-huan.xyz/2016/12/06/pythonlib/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -473,8 +459,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/18/mac-zhuabao/"
-           data-title="Mac上使用Wireshark抓iOS设备上的包" data-url="http://www.god-huan.xyz/2016/11/18/mac-zhuabao/">
+      <div class="ds-thread" data-thread-key="2016/12/06/pythonlib/"
+           data-title="Python第三方模块" data-url="http://www.god-huan.xyz/2016/12/06/pythonlib/">
       </div>
     
   </div>
@@ -591,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装Wireshark"><span class="nav-text">1.安装Wireshark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-准备设备"><span class="nav-text">2.准备设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-选择网卡，开始抓包"><span class="nav-text">3.选择网卡，开始抓包</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、Pillow-–-图像处理"><span class="nav-text">1、Pillow – 图像处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、virtualenv-–-为应用创建独立python运行环境"><span class="nav-text">2、virtualenv – 为应用创建独立python运行环境</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、常见的Web框架"><span class="nav-text">3、常见的Web框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、Jinja2-–-模板引擎"><span class="nav-text">4、Jinja2 – 模板引擎</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、Beautiful-Soup-–-从HTML或XML文件中提取数据"><span class="nav-text">5、Beautiful Soup – 从HTML或XML文件中提取数据</span></a></li></ol></div>
             
 
           </div>
